@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Transfornation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+        }
+        
+        /* Header/Navigation */
+        .header {
+            background-color: #898366;
+            height: 72px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: 31px;
+            margin-right: 10px;
+        }
+        
+        .logo {
+            width: 31px;
+            height: 40px;
+            margin-right: 12px;
+        }
+        
+        .logo-text {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 25px;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            text-decoration: none;
+            text-align: center;
+            padding: 5px 0px;
+        }
+
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-link.active {
+            background-color: rgba(250, 174, 23, 0);
+            border-radius: 2px;
+            padding: 5px 10px;
+            position: relative;
+            opacity: 1;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ffffff;
+        }
+
+        .donate-btn {
+            background-color: #931518;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .donate-btn:hover {
+            background-color: #7a1214;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-image: url('/images about/img_dsc07304_1_refined.png');
+            background-size: cover;
+            background-position: center;
+            height: 730px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 73px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero-title {
+            color: #ffffff;
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 59px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-text {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .get-involved-btn {
+            display: inline-block;
+            text-decoration: none;
+            background-color: rgba(147, 21, 24, 0.61);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            padding: 16px 30px;
+            border-radius: 8px;
+            border: 1px solid #ffffff;
+            cursor: pointer;
+            transition: all 0.3 ease;
+        }
+
+        .get-involved-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background-color: rgba(206, 33, 36, 0.8);
+        }
+
+        .get-involved-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linier;
+            pointer-events: none;
+        }
+
+        @keyframse ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* Team Section */
+        .team-section {
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 37px;
+            color: #000000;
+            margin-bottom: 50px;
+        }
+        
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .team-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            width: 224px;
+            height: 296px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .team-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        
+        .team-name {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #000000;
+            margin-bottom: 7px;
+        }
+        
+        .team-role {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17px;
+            color: #525252;
+        }
+        
+        .yellow-section {
+            background-color: #faaf17;
+            padding: 50px 0;
+        }
+        
+/* Enhanced Team Card Animations */
+.team-card {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* White background cards */
+.team-section .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Yellow background cards */
+.yellow-section .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Add subtle scale effect on image hover */
+.team-img {
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-img {
+    transform: scale(1.05);
+}
+
+/* Add border effect on hover */
+.team-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    border: 2px solid rgba(147, 21, 24, 0);
+    transition: border-color 0.3s ease;
+    pointer-events: none;
+}
+
+.team-card:hover::after {
+    border-color: rgba(147, 21, 24, 0.3);
+}
+
+/* Name highlight effect */
+.team-name {
+    transition: color 0.3s ease;
+}
+
+.team-card:hover .team-name {
+    color: #931518; /* Your brand red color */
+}
+
+
+        /* Footer */
+        /* --- Footer Alignment Fix --- */
+.footer {
+    background-color: #171717;
+    color: #ffffff;
+    padding: 50px 20px;
+    text-align: center; /* Center-align for mobile */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Distribute sections evenly */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 40px; /* Space between sections */
+}
+
+.footer-logo-section, 
+.footer-links-section, 
+.footer-social-section {
+    flex: 1; /* Each section takes equal width */
+    min-width: 200px; /* Prevent squeezing */
+}
+
+.footer-links-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.footer-link {
+    display: block; /* Stack links vertically */
+    color: #a3a3a3;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+}
+
+.footer-copyright {
+    width: 100%;
+    margin-top: 40px;
+    color: #a3a3a3;
+    font-size: 14px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+}
+
+.social-icons a {
+    text-decoration: none; /* Removes underline */
+    border-bottom: none !important; /* Ensures no border */
+}
+
+.social-icon {
+    filter: brightness(0) invert(1); /* Makes icons white */
+    width: 15px; /* Standardizes icon size */
+}
+
+.footer-logo {
+    width: 20px;  /* Adjust this value as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between logo and text */
+}
+
+.footer-logo-text {
+    font-size: 1.2rem; /* Adjust logo text size */
+}
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="/images about/img_logo_formal_1_2.png" alt="Transfornation Logo" class="logo">
+            <span class="logo-text">Transfornation</span>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link active">About</a>
+            <a href="program.html" class="nav-link">Programs</a>
+            <a href="#" class="nav-link">Get Involved</a>
+            
+        </nav>
+        
+        <a href="donate.html" class="donate-btn">Donate</a>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">About Transfornation</h1>
+            <p class="hero-text">Transfornation adalah wadah bagi para pemuda yang percaya bahwa perubahan dimulai dari langkah kecil. Sebagai Non Government Organization (NGO) , kami hadir dengan komitmen kuat untuk menginspirasi perubahan positif dan memberdayakan masyarakat di desa-desa dan kampung-kampung yang ada di negeri tercinta. Kami lahir dari keinginan tulus untuk menebar kemanfaatan dan berusaha membantu masyarakat sesuai dengan kemampuan kami.</p>
+            <a href="https://linktr.ee/transfornation" class="get-involved-btn" target="_blank">Get Involved</a>
+        </div>
+    </section>
+    
+    <!-- Main Team Section -->
+    <section class="team-section">
+        <h2 class="section-title">Mainboards:</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="/images about/Kak_Imau.jpeg" alt="M. Hilman Abdurrahman" class="team-img">
+                <h3 class="team-name">M. Hilman Abdurrahman</h3>
+                <p class="team-role">Project Manager</p>
+            </div>
+            
+            <div class="team-card">
+                <img src="/images about/img_rara_1.png" alt="Rara" class="team-img">
+                <h3 class="team-name">Rara</h3>
+                <p class="team-role">Secretary</p>
+            </div>
+            
+            <div class="team-card">
+                <img src="/images about/img_gadis_belia_1.png" alt="Gadis Belia Pramita" class="team-img">
+                <h3 class="team-name">Gadis Belia Pramita</h3>
+                <p class="team-role">Treasury</p>
+            </div>
+            
+            <div class="team-card">
+                <img src="/images about/img_dsc06216_1.png" alt="Fariz Ardiansyah" class="team-img">
+                <h3 class="team-name">Fariz Ardiansyah</h3>
+                <p class="team-role">Community Liaison</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Additional Team Section with Yellow Background -->
+    <section class="team-section yellow-section">
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="/images about/img_iqlima_hadaziah_1.png" alt="Iqlima Hadaziah" class="team-img">
+                <h3 class="team-name">Iqlima Hadaziah</h3>
+                <p class="team-role">Head of Creative</p>
+            </div>
+            
+            <div class="team-card">
+                <img src="/images about/img_rizqwi_1.png" alt="Rizqi Ardinatama" class="team-img">
+                <h3 class="team-name">Rizqi Ardinatama</h3>
+                <p class="team-role">creative</p>
+            </div>
+            
+            <div class="team-card">
+                <img src="/images about/img_desfinta_1.png" alt="Desfinta Puspita Maharani" class="team-img">
+                <h3 class="team-name">Desfinta Puspita Maharani</h3>
+                <p class="team-role">Social Media Specialist</p>
+            </div>
+            
+            <div class="team-card">
+                <img src="/images about/img_screenshot_20250312_051134_1.png" alt="Anthony Razi Und" class="team-img">
+                <h3 class="team-name">Anthony Razi Und</h3>
+                <p class="team-role">Community Liaison</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo-section">
+                <div class="footer-logo-container">
+                    <img src="/images about/img_logo_formal_1_2.png" alt="Transfornation Logo" class="footer-logo">
+                    <span class="footer-logo-text">Transfornation</span>
+                </div>
+                <p class="footer-tagline">Making a difference through community service.</p>
+            </div>
+            
+            <div class="footer-links-section">
+                <h4 class="footer-links-title">Quick Links</h4>
+                <a href="#" class="footer-link">About Us</a>
+                <a href="#" class="footer-link">Programs</a>
+                <a href="#" class="footer-link">Get Involved</a>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+            
+            <div class="footer-social-section">
+                <h4 class="footer-links-title">Connect</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram">
+                        <img src="/images about/img_frame.svg" alt="Instagram" class="social-icon">
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <img src="/images about/img_frame_16x14.svg" alt="LinkedIn" class="social-icon">
+                    </a>
+                </div>
+            </div>
+            
+            <p class="footer-copyright">Copyright ©2025 <br>Transfornation.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Get Involved button functionality
+        document.querySelector('.get-involved-btn').addEventListener('click', function() {
+            window.location.href = '#'; // Replace with actual Get Involved page URL
+        });
+        
+        // Donate button functionality
+        const getInvolvedBtn = document.querySelector('.get-involved-btn');
+if (getInvolvedBtn) {
+    getInvolvedBtn.addEventListener('click', function(e) {
+        if (this.tagName === 'BUTTON') { // Only needed if keeping as button
+            e.preventDefault();
+            window.location.href = 'https://linktr.ee/transfornation';
+        }
+        
+        // Ripple effect
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple-effect');
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+}
+
+const teamCards = document.querySelectorAll('.team-card');
+
+teamCards.forEach(card => {
+    // Click effect
+    card.addEventListener('click', function() {
+        this.style.transform = 'translateY(-2px)';
+        setTimeout(() => {
+            this.style.transform = 'translateY(-5px)';
+        }, 100);
+    });
+    
+    // Touch support for mobile
+    card.addEventListener('touchstart', function() {
+        this.classList.add('hover-effect');
+    });
+    
+    card.addEventListener('touchend', function() {
+        this.classList.remove('hover-effect');
+    });
+});
+
+
+
+        
+        // Navigation links functionality
+      
+        
+        // Footer links functionality
+        const footerLinks = document.querySelectorAll('.footer-link');
+        footerLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // In a real implementation, this would navigate to the page
+                console.log('Navigating to: ' + this.textContent.trim());
+            });
+        });
+        
+        // Social media links functionality
+        const socialLinks = document.querySelectorAll('.social-icons a');
+        socialLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // In a real implementation, this would open the social media page
+                console.log('Opening social media: ' + this.getAttribute('aria-label'));
+            });
+        });
+    </script>
+</body>
+</html>

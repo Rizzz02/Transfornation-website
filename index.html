@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Transfornation - Youth Impact for Nation's Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        /* Header/Navigation */
+        .navbar {
+            background-color: #898366;
+            height: 72px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-container img {
+            height: 40px;
+            width: 31px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 25px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #ffffff;
+            font-size: 16px;
+            text-decoration: none;
+            line-height: 20px;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links a.active {
+            opacity: 1;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ffffff;
+            animation: underlineFadeIn 0.3 ease-out;
+        }
+
+        @keyframes underlinesFadeIn {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        } 
+
+
+        .nav-links a:not(.active):hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 1px; /* Thinner than active state */
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.nav-links a:not(.active):hover::after {
+    transform: scaleX(1);
+}
+    
+        
+        .donate-btn {
+            background-color: #931518;
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-weight: 400;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .donate-btn:hover {
+            background-color: #7a1214;
+        }
+        
+        /* Hero Section */
+       .hero-section {
+            position: relative;
+            height: 690px;
+            width: 100%;
+            margin-top: 72px;
+            overflow: hidden;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #ffffff;
+            width: 100%%;
+            padding: 0 20px;
+        }
+        
+        .slide-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 48px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .slide-content p {
+            font-size: 20px;
+            line-height: 24px;
+            margin-bottom: 30px;
+            text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.25);
+        }
+        
+        .get-involved-btn {
+            background-color: rgba(147, 21, 24, 0.61);
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            border-radius: 8px;
+            padding: 16px 32px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0px 4px 4px #88888800;
+            transition: background-color 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        
+        .get-involved-btn:hover {
+            background-color: rgba(206, 33, 36, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .get-involved-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .get-involved-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1,1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .get-involved-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: :scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .slider-dot {
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+        }
+        
+        .slider-dot.active {
+            background-color: #000000;
+        }
+        
+        .slider-arrows {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .arrow {
+            background-color: rgba(255, 255, 255, 0);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .arrow:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Mission Section */
+        .mission-section {
+            display: flex;
+            padding: 80px 50px;
+            gap: 50px;
+            background-color: #ffffff;
+        }
+        
+        .event-poster {
+            width: 400px;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .event-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .mission-content {
+            flex: 1;
+        }
+        
+        .mission-content h2 {
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 37px;
+            margin-bottom: 30px;
+            color: #000000;
+        }
+        
+        .mission-content p {
+            font-size: 16px;
+            line-height: 24px;
+            color: #525252;
+            margin-bottom: 40px;
+        }
+        
+        .focus-cards {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .focus-card {
+            background-color: #898366;
+            border-radius: 8px;
+            padding: 30px;
+            width: 288px;
+            height: 128px;
+        }
+        
+        .focus-card h3 {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #000000;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .focus-card p {
+            font-size: 14px;
+            line-height: 17px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        /* Impact Section */
+        .impact-section {
+            background-color: #faaf17;
+            padding: 76px 50px;
+            text-align: center;
+        }
+        
+        .impact-section h2 {
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 37px;
+            margin-bottom: 50px;
+            color: #000000;
+        }
+        
+        .impact-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .impact-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 288px;
+            height: 120px;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .impact-card h3 {
+            font-size: 36px;
+            font-weight: 400;
+            line-height: 44px;
+            color: #262626;
+            margin-bottom: 10px;
+        }
+        
+        .impact-card p {
+            font-size: 16px;
+            line-height: 20px;
+            color: #525252;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 50px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta-section h2 {
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 37px;
+            margin-bottom: 30px;
+            color: #000000;
+        }
+        
+        .cta-section p {
+            font-size: 16px;
+            line-height: 24px;
+            color: #525252;
+            max-width: 620px;
+            margin: 0 auto 50px;
+        }
+        
+        .cta-buttons {
+            display: inline-block;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .cta-btn {
+            background-color: #931518;
+            color: #ffffff;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            padding: 16px 32px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .support-btn {
+            border: 2px solid #262626;
+        }
+        
+        .cta-btn:hover {
+            background-color: #7a1214;
+        }
+        
+        .mascot-left {
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            transform: translateX(-50%);
+            width: 208px;
+            height: 208px;
+        }
+        
+        .mascot-right {
+            position: absolute;
+            bottom: 0;
+            right: 25%;
+            transform: translateX(50%);
+            width: 218px;
+            height: 218px;
+        }
+        
+        /* Footer */
+    /* Updated Footer Styles */
+    .footer {
+        background-color: #171717;
+        color: #ffffff;
+        padding: 60px 20px 30px;
+        text-align: center;
+    }
+    
+    .footer-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .footer-columns {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+    
+    .footer-info {
+        flex: 1;
+        min-width: 250px;
+    }
+    
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    
+    .footer-logo img {
+        height: 28px;
+        width: 22px;
+        margin-right: 10px;
+    }
+    
+    .footer-logo-text {
+        font-size: 20px;
+        font-weight: 400;
+        color: #ffffff;
+    }
+    
+    .footer-tagline {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #a3a3a3;
+        margin-top: 10px;
+    }
+    
+    .footer-links {
+        flex: 1;
+        min-width: 150px;
+    }
+    
+    .footer-links h3 {
+        font-size: 18px;
+        font-weight: 500;
+        color: #ffffff;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .footer-links h3::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 2px;
+        background-color: #93151700;
+    }
+    
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .footer-links li {
+        margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+        font-size: 16px;
+        color: #a3a3a3;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+        color: #ffffff;
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: -5px;
+    }
+    
+    .social-links a {
+        color: #a3a3a3;
+        font-size: 20px;
+        transition: color 0.3s;
+    }
+    
+    .social-links a:hover {
+        color: #ffffff;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        margin-top: 30px;
+        border-top: 1px solid #333;
+    }
+    
+    .footer-bottom p {
+        font-size: 14px;
+        color: #a3a3a3;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    @media (max-width: 768px) {
+        .footer-columns {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .footer-links {
+            text-align: center;
+        }
+        
+        .footer-links h3::after {
+            display: none;
+        }
+    }
+        
+        @media (max-width: 1024px) {
+            .mission-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .impact-cards {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .focus-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .mascot-left, .mascot-right {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .slide-content h1 {
+                font-size: 36px;
+                line-height: 36px;
+            }
+            
+            .slide-content p {
+                font-size: 16px;
+                line-height: 20px;
+            }
+            
+            .mission-section, .impact-section, .cta-section {
+                padding: 50px 20px;
+            }
+            
+            .impact-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-top {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class='navbar'>
+        <div class='logo-container'>
+            <img src='/images home/img_logo_formal_1_1.png' alt='Transfornation Logo'>
+            <span class='logo-text'>Transfornation</span>
+        </div>
+        <div class='nav-links'>
+            <a href='index.html'>Home</a>
+            <a href='about.html'>About</a>
+            <a href='program.html'>Programs</a>
+            <a href="https://linktr.ee/transfornation" class="nav-link" target="_blank">Get Involved</a>
+            
+        </div>
+        <a href="donate.html" class='donate-btn'>Donate</a> <!-- Changed to anchor tag -->
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class='hero-section'>
+        <div class='slider'>
+            <div class='slide active' style='background-image: url(images\ home/img_dsc06822.png);'>
+                <div class='slide-content'>
+                    <h1>Youth Impact for Nation's Developement</h1>
+                    <p>Jadilah bagian dari perjalanan luar biasa ini. Kami mencari individu yang bersemangat, kreatif, dan berkomitmen untuk beraksi.</p>
+                    <a href="https://linktr.ee/transfornation" class="get-involved-btn" target="_blank">Get Involved</a>
+                </div>
+            </div>
+            <div class='slide' style='background-image: url(images\ home/DSC06904.JPG);'>
+                <div class='slide-content'>
+                    <h1>Youth Impact for Nation's Developement</h1>
+                    <p>Jadilah bagian dari perjalanan luar biasa ini. Kami mencari individu yang bersemangat, kreatif, dan berkomitmen untuk beraksi.</p>
+                    <a href="https://linktr.ee/transfornation" class="get-involved-btn" target="_blank">Get Involved</a>
+                </div>
+            </div>
+            <div class='slide' style='background-image: url(images\ home/img_dsc06712_refined.png);'>
+                <div class='slide-content'>
+                    <h1>Youth Impact for Nation's Developement</h1>
+                    <p>Jadilah bagian dari perjalanan luar biasa ini. Kami mencari individu yang bersemangat, kreatif, dan berkomitmen untuk beraksi.</p>
+                    <a href="https://linktr.ee/transfornation" class="get-involved-btn" target="_blank">Get Involved</a>
+                </div>
+            </div>
+            <div class='slider-nav'>
+                <div class='slider-dot active'></div>
+                <div class='slider-dot'></div>
+                <div class='slider-dot'></div>
+            </div>
+            <div class='slider-arrows'>
+                <div class='arrow prev-arrow'>
+                    <img src='/images home/img_vector_12_48x26.svg' alt='Previous'>
+                </div>
+                <div class='arrow next-arrow'>
+                    <img src='/images home/img_vector_12.svg' alt='Next'>  
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Mission Section -->
+    <section class='mission-section'>
+        <div class='event-poster'>
+            <img src='/images home/img_screenshot_20250311_100542_1.png' alt='TFN Event Poster'>
+        </div>
+        <div class='mission-content'>
+            <h2>Our Mission</h2>
+            <p>Transfornation is dedicated to empowering communities through sustainable service initiatives, education, and collaborative partnerships. We work tirelessly to address social challenges and create opportunities for meaningful change.</p>
+            <div class='focus-cards'>
+                <div class='focus-card'>
+                    <h3>Community Focus</h3>
+                    <p>Building stronger communities</p>
+                    <p>through targeted programs</p>
+                </div>
+                <div class='focus-card'>
+                    <h3>Volunteer Impact</h3>
+                    <p>Creating meaningful change through</p>
+                    <p>dedicated service</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Impact Section -->
+    <section class='impact-section'>
+        <h2>Our Impact in Numbers</h2>
+        <div class='impact-cards'>
+            <div class='impact-card'>
+                <h3>8+</h3>
+                <p>Volunteers Engaged</p>
+            </div>
+            <div class='impact-card'>
+                <h3>1+</h3>
+                <p>Communities Served</p>
+            </div>
+            <div class='impact-card'>
+                <h3>0K</h3>
+                <p>Lives Impacted</p>
+            </div>
+            <div class='impact-card'>
+                <h3>7+</h3>
+                <p>Projects Completed</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class='cta-section'>
+        <h2>Ready to Make a Difference?</h2>
+        <p>Join our community of changemakers and help us create lasting positive impact in communities around the world.</p>
+        <div class='cta-buttons'>
+             <a href="https://linktr.ee/transfornation" class="cta-btn" target="_blank">Get Involved</a>
+             <a href="donate.html" class='cta-btn support-btn'>Support Us</a> <!-- Changed to anchor tag -->
+        </div>
+        <img src='/images home/img_maskot_2.png' alt='Mascot' class='mascot-left'>
+        <img src='/images home/img_maskot.png' alt='Mascot' class='mascot-right'>
+    </section>
+    
+    <!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-columns">
+            <div class="footer-info">
+                <div class="footer-logo">
+                    <img src="/images home/img_logo_formal_1_1.png" alt="Transfornation Logo">
+                    <span class="footer-logo-text">Transfornation</span>
+                </div>
+                <p class="footer-tagline">Making a difference through community service.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Programs</a></li>
+                    <li><a href="#">Get Involved</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">
+                        <img src="/images about/img_frame.svg" alt="Instagram" class="social-icon">
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <img src="/images about/img_frame_16x14.svg" alt="LinkedIn" class="social-icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Copyright ©2025<br>Transfornation.</p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Slider functionality
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevArrow = document.querySelector('.prev-arrow');
+        const nextArrow = document.querySelector('.next-arrow');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Deactivate all dots
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Show the current slide and activate the corresponding dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        // Add event listeners to dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+        
+        // Add event listeners to arrows
+        prevArrow.addEventListener('click', prevSlide);
+        nextArrow.addEventListener('click', nextSlide);
+        
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+        
+        // Button hover effects
+        const buttons = document.querySelectorAll('button, a.donate-btn, a.cta-btn, a.get-involved-btn');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = 'scale(1.05)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+
+        // Update active nav link based on current page
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+});
+        
+        // Focus cards hover effect
+        const focusCards = document.querySelectorAll('.focus-card');
+        focusCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = 'none';
+            });
+        });
+        
+        // Impact cards hover effect
+        const impactCards = document.querySelectorAll('.impact-card');
+        impactCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0px 1px 2px rgba(0, 0, 0, 0.05)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformation - Our Programs</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 73px;
+            background-color: #898366;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            z-index: 1000;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            width: 31px;
+            height: 40px;
+            margin-right: 12px;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 25px;
+            color: #ffffff;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            position: relative;
+            padding: 5px 0;
+            transition: opacity 0.3s;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ffffff;
+            animation: underlineFadeIn 0.3s ease-out;
+        }
+
+        @keyframes underlineFadeIn {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+        
+        .donate-btn {
+            background-color: #931518;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .donate-btn:hover {
+            background-color: #7a1214;
+        }
+        
+        .hero-section {
+            position: relative;
+            height: 550px;
+            width: 100%;
+            background-image: url('/images program/img_dsc07503_1.png');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 96px;
+            margin-top: 73px;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 59px;
+            color: #ffffff;
+            margin-bottom: 25px;
+        }
+        
+        .hero-description {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #ffffff;
+            max-width: 750px;
+            margin-bottom: 40px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+        
+     .hero-btn {
+    /* Ensure it works as both button and link */
+    display: inline-block;
+    text-decoration: none; /* Remove underline */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    /* Your existing button styles */
+    background-color: rgba(147, 21, 24, 0.4);
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    padding: 16px 30px;
+    color: #ffffff;
+    font-size: 16px;
+    box-shadow: 0px 4px 4px #88888800;
+    transition: background-color 0.1s;
+}
+
+.hero-btn:hover {
+    background-color: rgba(205, 31, 34, 0.8);
+    text-decoration: none; /* Ensure no underline on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hero-btn.nav-link.active::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframs ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+.hero-btn:active {
+    transform: translateY(-1px) !important;
+}
+        
+        .programs-section {
+            padding: 80px 0;
+            background-color: #ffffff;
+        }
+        
+        .programs-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        
+/* Container for all posters */
+.poster-container {
+    display: flex;
+    height: 230px;
+    position: relative;
+    background: #f5f5f5; /* Fallback color */
+}
+
+/* Main poster (centered) */
+.main-poster {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.main-poster img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain; /* Ensures full image is visible */
+}
+
+/* Edge posters (blurred) */
+.edge-poster {
+    width: 25%;
+    overflow: hidden;
+    position: relative;
+}
+
+.edge-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(4px);
+    opacity: 0.7;
+}
+
+/* Position edge posters */
+.left-edge {
+    border-radius: 8px 0 0 8px;
+}
+
+.right-edge {
+    border-radius: 0 8px 8px 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Card hover effect */
+.program-card:hover .main-poster img {
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
+}
+
+        .program-card {
+            width: 372px;
+            height: 394px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .program-image {
+            height: 192px;
+            background-color: #f5f5f5;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .program-image-container {
+            display: none;
+        }
+        
+        .program-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .program-content {
+            padding: 25px;
+        }
+        
+        .program-title {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 25px;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+        
+        .program-description {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 16px;
+            color: #525252;
+            margin-bottom: 38px;
+        }
+        
+        .learn-more {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #262626;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .learn-more:hover {
+            border-color: #262626;
+        }
+        
+        .join-section {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .join-title {
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 37px;
+            color: #000000;
+            margin-bottom: 30px;
+        }
+        
+        .join-description {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 16px;
+            color: #525252;
+            max-width: 637px;
+            margin: 0 auto 50px;
+        }
+        
+        .join-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        
+        .apply-btn {
+            background-color: #931518;
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 20px 30px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #ffffff;
+            cursor: pointer;
+            box-shadow: 0px 4px 4px #888888;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .apply-btn:hover {
+            background-color: #7a1214;
+        }
+        
+        .contact-btn {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 20px 30px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #000000;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-btn:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .mascot-left {
+            position: absolute;
+            left: 334px;
+            bottom: 0;
+            width: 208px;
+            height: 208px;
+        }
+        
+        .mascot-right {
+            position: absolute;
+            right: 357px;
+            bottom: 0;
+            width: 218px;
+            height: 218px;
+        }
+        
+/* Footer Styles */
+.footer {
+    background-color: #171717;
+    color: #ffffff;
+    padding: 50px 20px;
+    text-align: center; /* Center-align for mobile */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Distribute sections evenly */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 40px; /* Space between sections */
+}
+
+.footer-logo-section, 
+.footer-links-section, 
+.footer-social-section {
+    flex: 1; /* Each section takes equal width */
+    min-width: 200px; /* Prevent squeezing */
+}
+
+.footer-links-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.footer-link {
+    display: block; /* Stack links vertically */
+    color: #a3a3a3;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+}
+
+.footer-copyright {
+    width: 100%;
+    margin-top: 40px;
+    color: #a3a3a3;
+    font-size: 14px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+}
+
+.social-icons a {
+    text-decoration: none; /* Removes underline */
+    border-bottom: none !important; /* Ensures no border */
+}
+
+.social-icon {
+    filter: brightness(0) invert(1); /* Makes icons white */
+    width: 15px; /* Standardizes icon size */
+}
+
+.footer-logo {
+    width: 20px;  /* Adjust this value as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.footer-logo-container {
+    display: flex;
+    align-items: flex;
+    gap: 20px; /* Space between logo and text */
+    margin-bottom: 5px;
+}
+
+.footer-logo-text {
+    font-size: 1.2rem; /* Adjust logo text size */
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="/images program/img_logo_formal_1_2.png" alt="Transformation Logo" class="logo-img">
+            <h1 class="logo-text">Transfornation</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="program.html" class="nav-link">Programs</a>
+            <a href="https://linktr.ee/transfornation" class="nav-link" target="_blank">Get Involved</a>
+            
+        </div>
+        <a href="donate.html" class="donate-btn">Donate</a>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Our Programs</h1>
+            <p class="hero-description">Lorem ipsum dolor sit amet, apiscing consectetur elit. Lorem ipsum dolor sit amet, apiscing consectetur elit.</p>
+            <div class="hero-buttons">
+                <button class="hero-btn" onclick="smoothScrollToPrograms()">View Programs</button>
+                <a href="https://linktr.ee/transfornation" class="hero-btn" target="_blank">Get Involved</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Programs Section -->
+    <section class="programs-section" id="programs-section">
+        <div class="programs-container">
+            <!-- Program Card 1 -->
+<div class="program-card">
+    <div class="poster-container">
+        <!-- Blurred left edge -->
+        <div class="edge-poster left-edge">
+            <img src="/images program/img_tfn_1_poster_2.png" alt="">
+        </div>
+        
+        <!-- Main centered poster -->
+        <div class="main-poster">
+            <img src="/images program/img_tfn_1_poster_1.png" alt="TFN #1 Dieng">
+        </div>
+        
+        <!-- Blurred right edge -->
+        <div class="edge-poster right-edge">
+            <img src="/images program/img_tfn_1_poster_2.png" alt="">
+        </div>
+    </div>
+    
+    <div class="program-content">
+        <h2 class="program-title">TFN #1 DIENG</h2>
+        <p class="program-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="learn-more">Learn More →</a>
+    </div>
+</div>
+            
+            <!-- Program Card 2 -->
+<div class="program-card">
+    <div class="poster-container">
+        <!-- Blurred left edge -->
+        <div class="edge-poster left-edge">
+            <img src="/images program/img_tfn2_2.png" alt="">
+        </div>
+        
+        <!-- Main centered poster -->
+        <div class="main-poster">
+            <img src="/images program/img_tfn2_1.png" alt="TFN #1 Dieng">
+        </div>
+        
+        <!-- Blurred right edge -->
+        <div class="edge-poster right-edge">
+            <img src="/images program/img_tfn2_2.png" alt="">
+        </div>
+    </div>
+    
+    <div class="program-content">
+        <h2 class="program-title">TFN #2 BALI</h2>
+        <p class="program-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="learn-more">Learn More →</a>
+    </div>
+</div>
+            
+            <!-- Program Card 3 -->
+<div class="program-card">
+    <div class="poster-container">
+        <!-- Blurred left edge -->
+        <div class="edge-poster left-edge">
+            <img src="/images program/img_tya_poster_2.png" alt="">
+        </div>
+        
+        <!-- Main centered poster -->
+        <div class="main-poster">
+            <img src="/images program/img_tya_poster_1.png" alt="TFN #1 Dieng">
+        </div>
+        
+        <!-- Blurred right edge -->
+        <div class="edge-poster right-edge">
+            <img src="/images program/img_tya_poster_3.png" alt="">
+        </div>
+    </div>
+    
+    <div class="program-content">
+        <h2 class="program-title">TYA Ambassador</h2>
+        <p class="program-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#" class="learn-more">Learn More →</a>
+    </div>
+</div>
+        </div>
+    </section>
+    
+    <!-- Join Section -->
+    <section class="join-section">
+        <h2 class="join-title">Join Our Programs</h2>
+        <p class="join-description">Be part of our mission to create positive change. Join our programs and help make a difference in your community.</p>
+        <div class="join-buttons">
+            <a href="https://linktr.ee/transfornation" class="apply-btn" target="_blank">Apply Now</a>
+            <button class="contact-btn">Contact Us</button>
+        </div>
+        <img src="/images program/img_maskot_2.png" alt="Mascot" class="mascot-left">
+        <img src="/images program/img_maskot.png" alt="Mascot" class="mascot-right">
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo-section">
+                <div class="footer-logo-container">
+                    <img src="/images about/img_logo_formal_1_2.png" alt="Transfornation Logo" class="footer-logo">
+                    <span class="footer-logo-text">Transfornation</span>
+                </div>
+                <p class="footer-tagline">Making a difference through community service.</p>
+            </div>
+            
+            <div class="footer-links-section">
+                <h4 class="footer-links-title">Quick Links</h4>
+                <a href="#" class="footer-link">About Us</a>
+                <a href="#" class="footer-link">Programs</a>
+                <a href="https://linktr.ee/transfornation" class="nav-link" target="_blank">Get Involved</a>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+            
+            <div class="footer-social-section">
+                <h4 class="footer-links-title">Connect</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram">
+                        <img src="/images about/img_frame.svg" alt="Instagram" class="social-icon">
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <img src="/images about/img_frame_16x14.svg" alt="LinkedIn" class="social-icon">
+                    </a>
+                </div>
+            </div>
+            
+            <p class="footer-copyright">Copyright ©2025 <br>Transfornation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Program card image slider functionality
+            
+            // Button hover effects
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Apply Now button functionality
+            //const applyBtn = document.querySelector('.apply-btn');
+            //applyBtn.addEventListener('click', function() {
+            //    alert('Application form will open soon!');
+            //});
+            
+            // Contact Us button functionality
+            const contactBtn = document.querySelector('.contact-btn');
+            contactBtn.addEventListener('click', function() {
+                window.location.href = '#'; // Redirect to contact page
+            });
+            
+            // Learn More links functionality
+            const learnMoreLinks = document.querySelectorAll('.learn-more');
+            learnMoreLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const programTitle = this.closest('.program-content').querySelector('.program-title').textContent;
+                    alert(`You will learn more about ${programTitle} soon!`);
+                });
+            });
+            
+            // Donate button functionality
+
+
+        // Update active nav link based on current page
+document.addEventListener('DOMContentLoaded', function() {
+    // Active nav link functionality
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+
+    // Contact button functionality
+    const contactBtn = document.querySelector('.contact-btn');
+    if (contactBtn) {
+        contactBtn.addEventListener('click', function() {
+            window.location.href = '#';
+        });
+    }
+
+    // Learn More links functionality
+    const learnMoreLinks = document.querySelectorAll('.learn-more');
+    learnMoreLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const programTitle = this.closest('.program-content').querySelector('.program-title').textContent;
+            alert(`You will learn more about ${programTitle} soon!`);
+        });
+    });
+});
+
+
+    </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fix for active nav marker
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.href === window.location.href || 
+            currentPath.includes(link.getAttribute('href'))) {
+            link.classList.add('active');
+        }
+    });
+
+    // Fix for View Programs button scroll
+    const viewProgramsBtn = document.querySelector('.hero-btn:first-child');
+    if (viewProgramsBtn) {
+        viewProgramsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const programsSection = document.querySelector('.programs-section');
+            if (programsSection) {
+                const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                window.scrollTo({
+                    top: programsSection.offsetTop - navbarHeight,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
+});
+</script>    
+
+</body>
+</html>

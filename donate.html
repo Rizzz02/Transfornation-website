@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfornation - Support Our Cause</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+        }
+        
+        .main-container {
+            position: relative;
+            width: 100%;
+            max-width: 1530px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            width: 100%;
+            height: 72px;
+            background-color: #898366;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+        }
+
+
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 31px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 25px;
+            color: #ffffff;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ffffff;
+            animation: underlineFadeIn o.3s ease-out;
+        }
+
+        @keyframes underlineFadeIn {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+
+
+
+.donate-btn {
+    background-color: #931518;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease;
+    position: relative; /* Remove if already in parent */
+    overflow: hidden; /* Contain any effects */
+}
+
+.donate-btn:hover {
+    background-color: #7a1214 !important; /* Force override */
+    transform: none !important; /* Disable transforms if conflicting */
+}
+
+/* Remove ALL ::after/::before pseudo-elements */
+.donate-btn::before, .donate-btn::after {
+    content: none !important;
+}
+
+        .donate-btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 928px;
+            margin-top: 72px;
+        }
+        
+        .hero-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 138px;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 14px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 19px;
+        }
+        
+        .hero-subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 20px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 34px;
+        }
+        
+        /* QR Code Section */
+        .qr-container {
+            width: 400px;
+            height: 448px;
+            background-color: rgba(137, 131, 102, 0.42);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 4px 4px rgba(136, 136, 136, 0);
+            margin-bottom: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .qr-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0, 12px, 24px rgba(0, 0, 0, 0.2);
+            background-color: rgba(137, 131, 102, 0.6);
+        }
+        
+        .qr-frame {
+            width: 300px;
+            height: 300px;
+            background-color: rgba(0, 0, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 17px;
+            transition: all 0.3 ease;
+        }
+
+        .qr-container:hover .qr-frame {
+            transform: scale(1.02);
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        
+        .qr-code {
+            width: 265px;
+            height: 265px;
+            animation: qr-pulse 2s infinite ease-in-out;
+        }
+        
+        .qr-text {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 16px;
+            color: #ffffff;
+            text-align: center;
+            transition: all 0.3 ease;
+            position: relative;
+        }
+
+        .qr-container:hover .qr-text {
+            color: #faaf17;
+            transform: scale(1.05);
+        }
+
+        @keyframes qr-pulse {
+            0% { opacity: 0.95; }
+            50% { opacity: 1; }
+            100% { opacity: 0.95; }
+        }
+
+        .qr-container:hover .qr-code {
+            animation: qr-pulse 1s infinite ease-in-out;
+        }
+        
+        .bank-transfer-text {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 16px;
+            color: #ffffff;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .bank-details {
+            width: 284px;
+            height: 128px;
+            background-color: rgba(255, 255, 255, 0.04);
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: 0px 4px 4px rgba(136, 136, 136, 0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .bank-details:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #faaf17;
+        }
+
+        .bank-details-title {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 20px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .bank-details:hover .account-number {
+            color: #4dabf7;
+            text-shadow: 0 0 8px rgba(250, 175, 23, 0.3);
+        }
+        
+        .bank-details-text {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 20px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 4px;
+            transition: all 0.2 ease;
+        }
+
+/* Account number specific styling */
+.account-number {
+    color: #4dabf7;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 400;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.account-number:hover {
+    color: #339af0;
+    text-decoration: none;
+}
+
+/* Animated underline effect */
+.account-number::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #339af0;
+    transition: width 0.2s ease;
+}
+
+.account-number:hover::after {
+    width: 100%;
+}
+
+/* Ensure the rest of the text remains normal */
+.bank-details-text {
+    color: #ffffff;
+}
+        
+        /* Form Section */
+        .form-section {
+            width: 100%;
+            background-color: #d9d9d9;
+            padding: 30px 0 60px;
+        }
+        
+        .form-title {
+            font-size: 36px;
+            font-weight: 400;
+            line-height: 44px;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .form-subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 16px;
+            color: #525252;
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 448px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .form-container {
+            max-width: 736px;
+            margin: 0 auto;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        .form-label {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17px;
+            color: #404040;
+            margin-bottom: 6px;
+            display: block;
+        }
+        
+        .form-input {
+            width: 100%;
+            height: 42px;
+            background-color: #ffffff;
+            border: 1px solid #d4d4d4;
+            border-radius: 8px;
+            padding: 0 12px;
+            font-size: 14px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #898366;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            height: 48px;
+            background-color: #262626;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .submit-btn:hover {
+            background-color: #404040;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #171717;
+            padding: 45px 0;
+            color: #ffffff;
+        }
+        
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .footer-logo {
+            width: 22px;
+            height: 28px;
+            margin-right: 16px;
+        }
+        
+        .footer-logo-text {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 25px;
+            color: #ffffff;
+        }
+        
+        .footer-tagline {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 16px;
+            color: #a3a3a3;
+            max-width: 214px;
+        }
+        
+        .footer-links-title {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            display: block;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #a3a3a3;
+            margin-bottom: 12px;
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            color: #ffffff;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        
+        .social-icon {
+            width: 14px;
+            height: 16px;
+            cursor: pointer;
+        }
+        
+        .copyright {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 16px;
+            color: #a3a3a3;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 10px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .qr-container {
+                width: 90%;
+                max-width: 400px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                padding: 0 20px;
+            }
+            
+            .footer-column {
+                margin-bottom: 30px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    /* Add your mobile menu toggle styles here */
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-top: 4px solid #931518;
+}
+
+.modal h3 {
+    color: #931518;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.modal p {
+    color: #525252;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+#userEmail {
+    font-weight: bold;
+    color: #931518;
+}
+
+.modal-close-btn {
+    background-color: #898366;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-close-btn:hover {
+    background-color: #7a7a5a;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+    </style>
+</head>
+<body>
+    <body style="margin:0;padding:0">
+    <div class="main-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="/images donate/img_logo_formal_1_1.png" alt="Transfornation Logo" class="logo">
+                <span class="logo-text">Transfornation</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="program.html" class="nav-link">Programs</a>
+                <a href="#" class="nav-link">Get Involved</a>
+                
+            </nav>
+            <button class="donate-btn">Donate</button>
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <img src="/images donate/img_dsc07508_1.png" alt="Donation Background" class="hero-image">
+            <div class="hero-content">
+                <h1 class="hero-title">Support Our Cause</h1>
+                <p class="hero-subtitle">Your donation helps us make a difference in the community</p>
+                
+                <!-- QR Code Section -->
+                <div class="qr-container">
+                    <div class="qr-frame">
+                        <img src="/images donate/img_screenshot_20250312_003847_1.png" alt="QR Code" class="qr-code">
+                    </div>
+                    <p class="qr-text">Scan to donate via QRIS</p>
+                </div>
+                
+                <p class="bank-transfer-text">Or donate via bank transfer:</p>
+                
+                <div class="bank-details">
+                    <p class="bank-details-title">Bank Account Details</p>
+                    <p class="bank-details-text">Bank Name: Bank Konoha</p>
+                    <p class="bank-details-text">Account: <span class="account-number">1234-5678-9012</span></p>
+                    <p class="bank-details-text">Name: Rizzzler mengabdi</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Form Section -->
+        <section class="form-section">
+            <h2 class="form-title">Fill the form</h2>
+            <p class="form-subtitle">After making a donation, please fill in this form so that we can send you the donation certificate</p>
+            
+            <div class="form-container">
+                <form id="donationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" id="firstName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" id="lastName" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-input" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <div class="footer-logo-container">
+                        <img src="/images donate/img_logo_formal_1_1.png" alt="Transfornation Logo" class="footer-logo">
+                        <span class="footer-logo-text">Transfornation</span>
+                    </div>
+                    <p class="footer-tagline">Making a difference through community service.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-links-title">Quick Links</h3>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Programs</a>
+                    <a href="#" class="footer-link">Get Involved</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-links-title">Connect</h3>
+                    <div class="social-icons">
+                        <img src="/images donate/img_frame.svg" alt="Instagram" class="social-icon">
+                        <img src="/images donate/img_frame_16x14.svg" alt="LinkedIn" class="social-icon">
+                    </div>
+                </div>
+            </div>
+            
+            <p class="copyright">Copyright ©2025 <br>Transfornation.</p>
+        </footer>
+    </div>
+
+    <!-- Success Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <h3>Thank You! ❤️</h3>
+        <p>Your donation helps create positive change. The certificate will be sent to <span id="userEmail"></span> within 24 hours.</p>
+        <button class="modal-close-btn">OK</button>
+    </div>
+</div>
+
+<script>
+
+// Add to your existing script
+document.querySelector('.qr-container').addEventListener('click', function() {
+    this.style.transform = 'translateY(-4px) scale(0.98)';
+    setTimeout(() => {
+        this.style.transform = 'translateY(-8px)';
+    }, 150);
+});
+
+
+// Set active nav link
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Form Submission Handler
+document.getElementById('donationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get user email for personalized message
+    const userEmail = document.getElementById('email').value;
+    document.getElementById('userEmail').textContent = userEmail;
+    
+    // Show modal
+    document.getElementById('successModal').style.display = 'flex';
+    
+    // Reset form
+    this.reset();
+});
+
+// Close Modal Handler
+document.querySelector('.modal-close-btn').addEventListener('click', function() {
+    document.getElementById('successModal').style.display = 'none';
+});
+
+// Close when clicking outside modal
+document.getElementById('successModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.style.display = 'none';
+    }
+});
+
+</script>
+    
+</body>
+</html>
